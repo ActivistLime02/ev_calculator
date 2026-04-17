@@ -42,7 +42,12 @@ pub fn Calculator() -> Element {
         }
 
         button {
-            class: "bg-ctp-mauve text-ctp-base px-4 py-2 rounded-md mt-2 mb-4 hover:brightness-110 transition-all",
+            class: "
+                bg-ctp-rosewater hover:bg-ctp-rosewater-800 text-ctp-base
+                px-4 py-2 my-2
+                rounded-md
+                cursor-pointer
+            ",
             onclick: move |_| {
                 result.set(battery_capacity() / charging_speed());
             },
