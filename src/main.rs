@@ -1,8 +1,8 @@
 use dioxus::prelude::*;
-use crate::layout::Layout;
 
-#[path ="components/layout.rs"]
-mod layout;
+mod components;
+
+use crate::components::*;
 
 fn main() {
     dioxus::launch(App);
@@ -11,6 +11,17 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx! {
-        Layout {}
+        Router::<Route> {}
     }
+}
+
+#[derive(Routable, Clone, PartialEq)]
+enum Route {
+    #[layout(DefaultLayout)]
+    #[route("/")]
+    Calculator,
+
+    // Catch-all route. Returns 404 when the user accesses a page that does not exist.
+    // #[route("/:..segments")]
+    // PageNotFound { segments: Vec<String> },
 }
