@@ -26,32 +26,36 @@ pub fn Calculator() -> Element {
         div {
             class: "mx-2",
             div {
-                class: "my-2",
-                Label {
-                    html_for: "battery_capacity",
-                    "Battery capacity (kWh)"
+                class: "
+                    grid gap-4 grid-cols-1
+                    my-2
+                ",
+                div {
+                    Label {
+                        html_for: "battery_capacity",
+                        "Battery capacity (kWh)"
+                    }
+                    Input {
+                        r#type: "number",
+                        id: "battery_capacity",
+                        class: "border-2 mt-1 p-2 rounded-md w-full",
+                        value: "{battery_capacity}",
+                        oninput: move |evt: FormEvent| battery_capacity.set(evt.value().parse().unwrap_or(0.0)),
+                    }
                 }
-                Input {
-                    r#type: "number",
-                    id: "battery_capacity",
-                    class: "border-2 mt-1 p-2 rounded-md",
-                    value: "{battery_capacity}",
-                    oninput: move |evt: FormEvent| battery_capacity.set(evt.value().parse().unwrap_or(0.0)),
-                }
-            }
 
-            div {
-                class: "my-2",
-                Label {
-                    html_for: "charging_speed",
-                    "Charging speed (kW)"
-                }
-                Input {
-                    r#type: "number",
-                    id: "charging_speed",
-                    class: "border-2 mt-1 p-2 rounded-md",
-                    value: "{charging_speed}",
-                    oninput: move |evt: FormEvent| charging_speed.set(evt.value().parse().unwrap_or(0.0)),
+                div {
+                    Label {
+                        html_for: "charging_speed",
+                        "Charging speed (kW)"
+                    }
+                    Input {
+                        r#type: "number",
+                        id: "charging_speed",
+                        class: "border-2 mt-1 p-2 rounded-md w-full",
+                        value: "{charging_speed}",
+                        oninput: move |evt: FormEvent| charging_speed.set(evt.value().parse().unwrap_or(0.0)),
+                    }
                 }
             }
 
