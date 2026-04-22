@@ -3,24 +3,24 @@ use dioxus::prelude::*;
 use crate::input::Input;
 use crate::label::Label;
 
-fn calculate_charging_time(
-    battery_capacity: Signal<f64>,
-    charging_speed: Signal<f64>,
-    mut result: Signal<f64>,
-) {
-    if charging_speed() != 0.0 {
-        result.set(battery_capacity() / charging_speed());
-    } else {
-        result.set(0.0);
-    }
-}
-
 #[component]
 pub fn Calculator() -> Element {
     let mut battery_capacity = use_signal(|| 0.0);
     let mut charging_speed = use_signal(|| 0.0);
 
     let mut result = use_signal(|| 0.0);
+
+    fn calculate_charging_time(
+        battery_capacity: Signal<f64>,
+        charging_speed: Signal<f64>,
+        mut result: Signal<f64>,
+    ) {
+        if charging_speed() != 0.0 {
+            result.set(battery_capacity() / charging_speed());
+        } else {
+            result.set(0.0);
+        }
+    }
 
     rsx! {
         div {
