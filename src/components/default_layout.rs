@@ -29,7 +29,7 @@ pub fn DefaultLayout() -> Element {
 
             // Container
             div {
-                class: "container my-4",
+                class: "container my-4 mx-auto p-4",
                 Outlet::<Route> {}
             }
         }
