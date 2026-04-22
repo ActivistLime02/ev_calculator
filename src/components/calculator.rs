@@ -12,7 +12,9 @@ pub fn Calculator() -> Element {
 
     rsx! {
         div {
-            class: "my-2",
+            class: "mx-2",
+            div {
+                class: "my-2",
             Label {
                 html_for: "battery_capacity",
                 "Battery capacity (kWh)"
@@ -56,6 +58,7 @@ pub fn Calculator() -> Element {
 
         if result() != 0.0 {
             p { "You need to charge for {(result() as f64).trunc()} hours and {((result() as f64).fract() * 60.0).ceil()} minutes." }
+            }
         }
     }
 }
