@@ -7,16 +7,21 @@ use crate::label::Label;
 pub fn Calculator() -> Element {
     let mut battery_capacity = use_signal(|| 0.0);
     let mut charging_speed = use_signal(|| 0.0);
+    let mut charge_from_percentage = use_signal(|| 0);
+    let mut charge_to_percentage = use_signal(|| 100);
 
     let mut result = use_signal(|| 0.0);
 
     fn calculate_charging_time(
         battery_capacity: Signal<f64>,
         charging_speed: Signal<f64>,
+        charge_from_percentage: Signal<i32>,
+        charge_to_percentage: Signal<i32>,
         mut result: Signal<f64>,
     ) {
+        let percentage_to_charge: f64 = (charge_to_percentage() as f64 - charge_from_percentage() as f64) / 100.0;
         if charging_speed() != 0.0 {
-            result.set(battery_capacity() / charging_speed());
+            result.set(battery_capacity() * percentage_to_charge / charging_speed());
         } else {
             result.set(0.0);
         }
@@ -55,6 +60,34 @@ pub fn Calculator() -> Element {
                     oninput: move |evt: FormEvent| charging_speed.set(evt.value().parse().unwrap_or(0.0)),
                 }
             }
+
+            div {
+                Label {
+                    html_for: "start_soc",
+                    "Current SoC (%)"
+                }
+                Input {
+                    r#type: "number",
+                    id: "start_soc",
+                    class: "border-2 mt-1 p-2 rounded-md w-full",
+                    value: "{charge_from_percentage}",
+                    oninput: move |evt: FormEvent| charge_from_percentage.set(evt.value().parse().unwrap_or(0)),
+                }
+            }
+
+            div {
+                Label {
+                    html_for: "stop_soc",
+                    "Desired SoC (%)"
+                }
+                Input {
+                    r#type: "number",
+                    id: "stop_soc",
+                    class: "border-2 mt-1 p-2 rounded-md w-full",
+                    value: "{charge_to_percentage}",
+                    oninput: move |evt: FormEvent| charge_to_percentage.set(evt.value().parse().unwrap_or(0)),
+                }
+            }
         }
 
         if result() != 0.0 {
@@ -90,7 +123,13 @@ pub fn Calculator() -> Element {
                 cursor-pointer
             ",
             onclick: move |_| {
-                calculate_charging_time(battery_capacity, charging_speed, result);
+                calculate_charging_time(
+                    battery_capacity,
+                    charging_speed,
+                    charge_from_percentage,
+                    charge_to_percentage,
+                    result
+                );
             },
             "Calculate"
         }
