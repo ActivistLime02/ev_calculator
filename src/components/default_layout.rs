@@ -13,7 +13,7 @@ pub fn DefaultLayout() -> Element {
             href: TAILWIND_CSS
         }
 
-        body {
+        div {
             class: "bg-ctp-base text-ctp-text latte",
             Header {}
 
