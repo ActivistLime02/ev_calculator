@@ -61,7 +61,7 @@ pub fn Calculator() -> Element {
                             top-2 right-1
                             cursor-pointer
                         ",
-                        onclick: move |evt: MouseEvent| result.set(0.0)
+                        onclick: move |_| result.set(0.0)
                     }
 
                     p { "You need to charge for {(result() as f64).trunc()} hours and {((result() as f64).fract() * 60.0).ceil()} minutes." }
