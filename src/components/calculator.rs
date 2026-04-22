@@ -29,109 +29,113 @@ pub fn Calculator() -> Element {
 
     rsx! {
         div {
-            class: "
-                grid gap-4 grid-cols-1
-                my-2
-            ",
-            div {
-                Label {
-                    html_for: "battery_capacity",
-                    "Battery capacity (kWh)"
-                }
-                Input {
-                    r#type: "number",
-                    id: "battery_capacity",
-                    class: "border-2 mt-1 p-2 rounded-md w-full",
-                    value: "{battery_capacity}",
-                    oninput: move |evt: FormEvent| battery_capacity.set(evt.value().parse().unwrap_or(0.0)),
-                }
-            }
-
-            div {
-                Label {
-                    html_for: "charging_speed",
-                    "Charging speed (kW)"
-                }
-                Input {
-                    r#type: "number",
-                    id: "charging_speed",
-                    class: "border-2 mt-1 p-2 rounded-md w-full",
-                    value: "{charging_speed}",
-                    oninput: move |evt: FormEvent| charging_speed.set(evt.value().parse().unwrap_or(0.0)),
-                }
-            }
-
-            div {
-                Label {
-                    html_for: "start_soc",
-                    "Current SoC (%)"
-                }
-                Input {
-                    r#type: "number",
-                    id: "start_soc",
-                    class: "border-2 mt-1 p-2 rounded-md w-full",
-                    value: "{charge_from_percentage}",
-                    oninput: move |evt: FormEvent| charge_from_percentage.set(evt.value().parse().unwrap_or(0)),
-                }
-            }
-
-            div {
-                Label {
-                    html_for: "stop_soc",
-                    "Desired SoC (%)"
-                }
-                Input {
-                    r#type: "number",
-                    id: "stop_soc",
-                    class: "border-2 mt-1 p-2 rounded-md w-full",
-                    value: "{charge_to_percentage}",
-                    oninput: move |evt: FormEvent| charge_to_percentage.set(evt.value().parse().unwrap_or(0)),
-                }
-            }
-        }
-
-        if result() != 0.0 {
+            class: "@container",
             div {
                 class: "
-                    rounded-md bg-ctp-surface0 p-2
-                    relative
+                    grid gap-4 grid-cols-1
+                    @lg:grid-cols-2
+                    my-2
                 ",
-
-                h2 {
-                    "Result:"
+                div {
+                    Label {
+                        html_for: "battery_capacity",
+                        "Battery capacity (kWh)"
+                    }
+                    Input {
+                        r#type: "number",
+                        id: "battery_capacity",
+                        class: "border-2 mt-1 p-2 rounded-md w-full",
+                        value: "{battery_capacity}",
+                        oninput: move |evt: FormEvent| battery_capacity.set(evt.value().parse().unwrap_or(0.0)),
+                    }
                 }
 
-                i {
-                    class: "
-                        fa-solid fa-x
-                        absolute
-                        top-2 right-1
-                        cursor-pointer
-                    ",
-                    onclick: move |_| result.set(0.0)
+                div {
+                    Label {
+                        html_for: "charging_speed",
+                        "Charging speed (kW)"
+                    }
+                    Input {
+                        r#type: "number",
+                        id: "charging_speed",
+                        class: "border-2 mt-1 p-2 rounded-md w-full",
+                        value: "{charging_speed}",
+                        oninput: move |evt: FormEvent| charging_speed.set(evt.value().parse().unwrap_or(0.0)),
+                    }
                 }
 
-                p { "You need to charge for {(result() as f64).trunc()} hours and {((result() as f64).fract() * 60.0).ceil()} minutes." }
+                div {
+                    Label {
+                        html_for: "start_soc",
+                        "Current SoC (%)"
+                    }
+                    Input {
+                        r#type: "number",
+                        id: "start_soc",
+                        class: "border-2 mt-1 p-2 rounded-md w-full",
+                        value: "{charge_from_percentage}",
+                        oninput: move |evt: FormEvent| charge_from_percentage.set(evt.value().parse().unwrap_or(0)),
+                    }
+                }
+
+                div {
+                    Label {
+                        html_for: "stop_soc",
+                        "Desired SoC (%)"
+                    }
+                    Input {
+                        r#type: "number",
+                        id: "stop_soc",
+                        class: "border-2 mt-1 p-2 rounded-md w-full",
+                        value: "{charge_to_percentage}",
+                        oninput: move |evt: FormEvent| charge_to_percentage.set(evt.value().parse().unwrap_or(0)),
+                    }
+                }
             }
-        }
 
-        button {
-            class: "
-                bg-ctp-rosewater hover:bg-ctp-rosewater-800 text-ctp-base
-                px-4 py-2 my-2
-                rounded-md
-                cursor-pointer
-            ",
-            onclick: move |_| {
-                calculate_charging_time(
-                    battery_capacity,
-                    charging_speed,
-                    charge_from_percentage,
-                    charge_to_percentage,
-                    result
-                );
-            },
-            "Calculate"
+            if result() != 0.0 {
+                div {
+                    class: "
+                        rounded-md bg-ctp-surface0 p-2
+                        relative
+                    ",
+
+                    h2 {
+                        "Result:"
+                    }
+
+                    i {
+                        class: "
+                            fa-solid fa-x
+                            absolute
+                            top-2 right-1
+                            cursor-pointer
+                        ",
+                        onclick: move |_| result.set(0.0)
+                    }
+
+                    p { "You need to charge for {(result() as f64).trunc()} hours and {((result() as f64).fract() * 60.0).ceil()} minutes." }
+                }
+            }
+
+            button {
+                class: "
+                    bg-ctp-rosewater hover:bg-ctp-rosewater-800 text-ctp-base
+                    px-4 py-2 my-2
+                    rounded-md
+                    cursor-pointer
+                ",
+                onclick: move |_| {
+                    calculate_charging_time(
+                        battery_capacity,
+                        charging_speed,
+                        charge_from_percentage,
+                        charge_to_percentage,
+                        result
+                    );
+                },
+                "Calculate"
+            }
         }
     }
 }
