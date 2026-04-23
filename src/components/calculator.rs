@@ -1,22 +1,23 @@
 use dioxus::prelude::*;
+use dioxus_sdk_storage::{LocalStorage, use_storage};
 
 use crate::input::Input;
 use crate::label::Label;
 
 #[component]
 pub fn Calculator() -> Element {
-    let mut battery_capacity = use_signal(|| 0.0);
-    let mut charging_speed = use_signal(|| 0.0);
-    let mut charge_from_percentage = use_signal(|| 0);
-    let mut charge_to_percentage = use_signal(|| 100);
+    let mut battery_capacity = use_storage::<LocalStorage, f64>("battery_capacity".to_string(), || 0.0);
+    let mut charging_speed = use_storage::<LocalStorage, f64>("charging_speed".to_string(), || 0.0);
+    let mut charge_from_percentage = use_storage::<LocalStorage, u32>("charge_from_percentage".to_string(), || 0);
+    let mut charge_to_percentage = use_storage::<LocalStorage, u32>("charge_to_percentage".to_string(), || 100);
 
     let mut result = use_signal(|| 0.0);
 
     fn calculate_charging_time(
         battery_capacity: Signal<f64>,
         charging_speed: Signal<f64>,
-        charge_from_percentage: Signal<i32>,
-        charge_to_percentage: Signal<i32>,
+        charge_from_percentage: Signal<u32>,
+        charge_to_percentage: Signal<u32>,
         mut result: Signal<f64>,
     ) {
         let percentage_to_charge: f64 = (charge_to_percentage() as f64 - charge_from_percentage() as f64) / 100.0;
