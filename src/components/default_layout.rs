@@ -3,6 +3,7 @@ use dioxus::prelude::*;
 use crate::Route;
 
 use crate::Header;
+use crate::Footer;
 
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
 
@@ -24,14 +25,22 @@ pub fn DefaultLayout() -> Element {
          }
 
         div {
-            class: "bg-ctp-base text-ctp-text latte",
+            class: "
+                bg-ctp-base text-ctp-text latte
+                flex flex-col min-h-screen
+            ",
             Header {}
 
             // Container
             div {
-                class: "container my-4 mx-auto p-4",
+                class: "
+                    container my-4 mx-auto p-4
+                    grow
+                ",
                 Outlet::<Route> {}
             }
+
+            Footer {}
         }
     }
 }
