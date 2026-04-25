@@ -1,5 +1,4 @@
 use dioxus::prelude::*;
-// use dioxus_primitives::navbar::{Navbar, NavbarItem};
 use crate::navbar::*;
 use crate::Route;
 
