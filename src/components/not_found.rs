@@ -25,7 +25,7 @@ pub fn NotFound(segments: Vec<String>) -> Element {
         }
         Link {
             class: "
-                bg-ctp-lavender hover:bg-ctp-rosewater-800 text-ctp-base
+                bg-ctp-lavender text-ctp-base
                 px-4 py-2 my-2
                 rounded-md
                 cursor-pointer
