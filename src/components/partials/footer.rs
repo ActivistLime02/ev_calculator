@@ -1,5 +1,5 @@
 use dioxus::prelude::*;
-use dioxus_free_icons::{Icon, icons::fa_brands_icons::{FaGithub, FaLinkedin, FaLinkedinIn}};
+use dioxus_free_icons::{Icon, icons::fa_brands_icons::{FaGithub, FaLinkedin}};
 
 #[component]
 pub fn Footer() -> Element {
