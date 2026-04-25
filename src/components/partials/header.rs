@@ -12,6 +12,12 @@ pub fn Header() -> Element {
                 to: Route::Calculator,
                 "Calculator"
             }
+            NavbarItem {
+                index: 1usize,
+                value: "portfolio".to_string(),
+                to: "https://nickhesemans.be",
+                "Portfolio"
+            }
         }
     }
 }
