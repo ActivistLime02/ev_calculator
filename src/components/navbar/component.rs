@@ -9,7 +9,7 @@ pub fn Navbar(props: NavbarProps) -> Element {
     rsx! {
         document::Link { rel: "stylesheet", href: asset!("./style.css") }
         navbar::Navbar {
-            class: "navbar",
+            class: "navbar bg-ctp-surface0",
             disabled: props.disabled,
             roving_loop: props.roving_loop,
             attributes: props.attributes,
@@ -63,7 +63,7 @@ pub fn NavbarContent(props: NavbarContentProps) -> Element {
 pub fn NavbarItem(props: NavbarItemProps) -> Element {
     rsx! {
         navbar::NavbarItem {
-            class: "navbar-item",
+            class: "navbar-item hover:text-ctp-rosewater hover:bg-ctp-mantle",
             index: props.index,
             value: props.value,
             disabled: props.disabled,
