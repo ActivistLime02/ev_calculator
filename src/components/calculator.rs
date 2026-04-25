@@ -121,7 +121,7 @@ pub fn Calculator() -> Element {
 
             button {
                 class: "
-                    bg-ctp-rosewater hover:bg-ctp-rosewater-800 text-ctp-base
+                    bg-ctp-lavender hover:bg-ctp-rosewater-800 text-ctp-base
                     px-4 py-2 my-2
                     rounded-md
                     cursor-pointer
