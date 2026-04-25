@@ -1,0 +1,11 @@
+---
+services:
+  web-server:
+    container_name: ev_calculator-server
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "8888:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
