@@ -1,4 +1,6 @@
 use dioxus::prelude::*;
+use dioxus_free_icons::Icon;
+use dioxus_free_icons::icons::fa_solid_icons::FaX;
 use dioxus_sdk_storage::{LocalStorage, use_storage};
 
 use crate::input::Input;
@@ -109,14 +111,17 @@ pub fn Calculator() -> Element {
                         "Result:"
                     }
 
-                    i {
+                    button {
                         class: "
-                            fa-solid fa-x
                             absolute
-                            top-2 right-1
+                            top-2 right-1 mb-1
                             cursor-pointer
+                            hover:text-ctp-red
                         ",
-                        onclick: move |_| result.set(0.0)
+                        onclick: move |_| result.set(0.0),
+                        Icon {
+                            icon: FaX
+                        }
                     }
 
                     p { "You need to charge for {(result() as f64).trunc()} hours and {((result() as f64).fract() * 60.0).ceil()} minutes." }

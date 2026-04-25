@@ -1,4 +1,5 @@
 use dioxus::prelude::*;
+use dioxus_free_icons::{Icon, icons::fa_brands_icons::{FaGithub, FaLinkedin, FaLinkedinIn}};
 
 #[component]
 pub fn Footer() -> Element {
@@ -14,7 +15,12 @@ pub fn Footer() -> Element {
                         class: "text-ctp-blue border-b-2 hover:text-ctp-rosewater",
                         to: "https://github.com/ActivistLime02",
                         new_tab: true,
-                        i { class: "fa-brands fa-github" } " Github"
+                        Icon {
+                            height: 16,
+                            class: "inline-block mb-1",
+                            icon: FaGithub
+                        }
+                        "Github"
                     }
                 }
                 li {
@@ -22,7 +28,12 @@ pub fn Footer() -> Element {
                         class: "text-ctp-blue border-b-2 hover:text-ctp-rosewater",
                         to: "https://www.linkedin.com/in/nick-hesemans/",
                         new_tab: true,
-                        i { class: "fa-brands fa-linkedin" } " LinkedIn"
+                        Icon {
+                            height: 16,
+                            class: "inline-block mb-1",
+                            icon: FaLinkedin
+                        }
+                        "LinkedIn"
                     }
                 }
             }
