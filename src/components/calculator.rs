@@ -29,6 +29,10 @@ pub fn Calculator() -> Element {
     }
 
     rsx! {
+        document::Title {
+            "EV Charge Time Calculator"
+        }
+
         div {
             class: "@container",
             div {
