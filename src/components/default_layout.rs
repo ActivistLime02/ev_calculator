@@ -6,6 +6,7 @@ use crate::Header;
 use crate::Footer;
 
 const TAILWIND_CSS: Asset = asset!("/assets/tailwind.css");
+const FAVICON: Asset = asset!("/assets/favicon.svg");
 
 #[component]
 pub fn DefaultLayout() -> Element {
@@ -23,6 +24,11 @@ pub fn DefaultLayout() -> Element {
             crossorigin: "anonymous",
             referrerpolicy: "no-referrer"
          }
+
+        document::Link {
+            rel: "icon",
+            href: FAVICON
+        }
 
         div {
             class: "
