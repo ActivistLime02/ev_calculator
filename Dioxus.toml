@@ -3,7 +3,7 @@
 [web.app]
 
 # HTML title tag content
-title = "ev_calculator"
+title = "EV Charge Time Calculator"
 
 # include `assets` in web platform
 [web.resource]
