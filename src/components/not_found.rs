@@ -6,9 +6,13 @@ use crate::Route;
 pub fn NotFound(segments: Vec<String>) -> Element {
     let full_url = "/".to_string() + &segments.join("/");
     rsx! {
+        document::Title {
+            "404 Page Not Found"
+        }
+
         h1 {
             class: "text-ctp-rosewater text-3xl mt-4 mb-2",
-            "404 page not found"
+            "404 Page Not Found"
         }
         p {
             class: "",
